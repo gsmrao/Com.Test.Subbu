@@ -32,7 +32,7 @@ namespace Com.TestProject.Subbu.AutomationPractice_WebPages.TShirts
 
         Dictionary<string, string> dictOrderSummaryDetails = new Dictionary<string, string>();
 
-        ///html/body/div/div[2]/div/div[3]/div/div[2]/table/tbody/tr
+        
         public Dictionary<string,string> GetOrderDetails()
         {
             Dictionary<string, string> lstOrderDetails = new Dictionary<string, string>();

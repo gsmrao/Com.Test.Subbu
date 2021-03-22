@@ -74,14 +74,14 @@ namespace NUnitTestProjectSample.FeatureFiles
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Order TShirt and Validate Order Summary")]
+        [NUnit.Framework.DescriptionAttribute("Update Personal Information")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void OrderTShirtAndValidateOrderSummary()
+        public virtual void UpdatePersonalInformation()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order TShirt and Validate Order Summary", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Personal Information", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -107,38 +107,28 @@ this.ScenarioInitialize(scenarioInfo);
                         "hrome\" browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.Then("I click on T-SHIRTS tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I click on Sigin button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 8
- testRunner.And("I select and click on T-Shirts AddCart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Enter login details \"gsmrao@gmail.com\" and \"July@2006\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "productName",
-                            "unitPrice",
-                            "qty",
-                            "total"});
-                table1.AddRow(new string[] {
-                            "Faded Short Sleeve T-shirts",
-                            "$16.51",
-                            "1",
-                            "$16.51"});
 #line 9
- testRunner.Then("I validae Order Summary", ((string)(null)), table1, "Then ");
+ testRunner.And("Update Personal Information \"SubbuAB\" and \"July@2006\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Update Personal Information")]
+        [NUnit.Framework.DescriptionAttribute("Order TShirt and Validate Order Summary")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void UpdatePersonalInformation()
+        public virtual void OrderTShirtAndValidateOrderSummary()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Personal Information", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 14
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order TShirt and Validate Order Summary", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 13
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -158,18 +148,37 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 15
+#line 14
  testRunner.Given("I launch below application using \"http://automationpractice.com/index.php\" and \"C" +
                         "hrome\" browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 16
+#line 15
  testRunner.Then("I click on Sigin button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 17
+#line 16
  testRunner.And("Enter login details \"gsmrao@gmail.com\" and \"July@2006\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
+#line 17
+ testRunner.Then("I click on T-SHIRTS tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
 #line 18
- testRunner.And("Update Personal Information \"SubbuAB\" and \"July@2006\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I select T-Shirt and I Order the T-Shirts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 19
+ testRunner.Then("Click on login id from menu link and Click on Order Summary details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "productName",
+                            "unitPrice",
+                            "qty",
+                            "total"});
+                table1.AddRow(new string[] {
+                            "Faded Short Sleeve T-shirts",
+                            "$16.51",
+                            "1",
+                            "$16.51"});
+#line 20
+ testRunner.Then("I validae Order Summary", ((string)(null)), table1, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

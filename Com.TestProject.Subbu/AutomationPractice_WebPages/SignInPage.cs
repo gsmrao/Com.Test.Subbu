@@ -43,6 +43,11 @@ namespace Com.TestProject.Subbu.AutomationPractice_WebPages
         public IWebElement SigninButton { get; set; }
 
 
+        
+        [FindsBy(How = How.XPath, Using = "//*[@id='header']/div[2]/div/div/nav/div[1]/a")]
+        public IWebElement UserNameLinkButton { get; set; }
+
+
         public void ClickOnSiginTab()
         {
             SiginTab.Click();
@@ -56,6 +61,12 @@ namespace Com.TestProject.Subbu.AutomationPractice_WebPages
             Password.SendKeys(strPassword);
             SigninButton.Click();
 
+        }
+
+        public void ClickOnUserNameButton()
+        {
+            wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(100));
+            UserNameLinkButton.Click();
         }
     }
 }

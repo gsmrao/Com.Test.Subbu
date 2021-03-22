@@ -97,6 +97,7 @@
     <Compile Include="AutomationPractice_WebPages\PersonalInformation.cs" />
     <Compile Include="AutomationPractice_WebPages\SignInPage.cs" />
     <Compile Include="AutomationPractice_WebPages\TShirts\TShirtsPage.cs" />
+    <Compile Include="AutomationPractice_WebPages\TShirts\TShirts_OrderSummary.cs" />
     <Compile Include="AutomationPractice_WebPages\TShirts\TShirt_OrderHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\Steps.cs" />

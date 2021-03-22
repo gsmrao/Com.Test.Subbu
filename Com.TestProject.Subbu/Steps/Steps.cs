@@ -14,6 +14,7 @@ using Com.TestProject.Subbu.AutomationPractice_WebPages.TShirts;
 using TechTalk.SpecFlow.NUnit;
 using NUnit.Framework;
 using Com.TestProject.Subbu.AutomationPractice_WebPages;
+using System.Text.RegularExpressions;
 
 namespace Com.TestProject.Subbu.Steps
 {
@@ -25,14 +26,22 @@ namespace Com.TestProject.Subbu.Steps
         IndexPage indexPage;
         TShirtsPage tShirtsPage;
         TShirt_OrderHistory shirt_OrderHistory;
+        TShirts_OrderSummary shirts_OrderSummary;
+        public List<Dictionary<string, string>> dictOrderSummaryDetails = new List<Dictionary<string, string>>();
+
         SignInPage signInPage;
         PersonalInformation personalInformation;
 
+
         IEnumerable<OrderDetails> orderDetails = null;
+
+        public string OrderReferenceNumber { get; set; }
 
         [Given(@"I launch below application using ""(.*)"" and ""(.*)"" browser")]
         public void GivenILaunchBelowApplicationUsingAndBrowser(string strSiteURL, string strBrowserType)
         {
+            
+
             if (strBrowserType == "Chrome")
             {
                 driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
@@ -55,7 +64,8 @@ namespace Com.TestProject.Subbu.Steps
         public void ThenISelectAndClickOnT_ShirtsAddCart()
         {
             tShirtsPage = new TShirtsPage(driver);
-            tShirtsPage.AddCart_Click();
+            tShirtsPage.OrderTShirtAndGetOrderDetails();
+            //tShirtsPage.AddCart_Click();
         }
 
         [Then(@"I validae Order Summary")]
@@ -63,44 +73,44 @@ namespace Com.TestProject.Subbu.Steps
         {
             orderDetails = table.CreateSet<OrderDetails>();
 
-            Dictionary<string, string> lstGetOrderDetails = new Dictionary<string, string>();
-
-            shirt_OrderHistory = new TShirt_OrderHistory(driver);
-
-            lstGetOrderDetails = shirt_OrderHistory.GetOrderDetails();
-
-            var expData = (from expOrderDetails in orderDetails
-                           select new
-                           {
-                               expOrderDetails.productName,
-                               expOrderDetails.unitPrice,
-                               expOrderDetails.qty,
-                               expOrderDetails.total
-                           }
-                          ).ToList();
-            foreach (var item in expData)
+            foreach (var expOrderDetails in orderDetails)
             {
-                foreach (var actValue in lstGetOrderDetails)
+                for (int i = 0; i < dictOrderSummaryDetails.Count; i++)
                 {
-                    if (nameof(item.productName) == actValue.Key)
+                    foreach (var actOrderDetails in dictOrderSummaryDetails[i])
                     {
-                        Assert.AreEqual(item.productName, actValue.Value);
-                    }
-                    else if (nameof(item.unitPrice) == actValue.Key)
-                    {
-                        Assert.AreEqual(item.unitPrice, actValue.Value);
-                    }
-                    else if (nameof(item.qty) == actValue.Key)
-                    {
-                        Assert.AreEqual(item.qty, actValue.Value);
-                    }
-                    else if (nameof(item.total) == actValue.Key)
-                    {
-                        Assert.AreEqual(item.total, actValue.Value);
+                        //| productName                 | unitPrice | qty | total  |
+                        if (nameof(expOrderDetails.productName) == actOrderDetails.Key)
+                        {
+                            if (actOrderDetails.Value.Contains(expOrderDetails.productName))
+                            {
+                                Assert.AreEqual(true, true);
+                            }
+                            else
+                            {
+                                Assert.AreEqual(false, true);
+                            }
+
+                        }
+                        else if (nameof(expOrderDetails.unitPrice) == actOrderDetails.Key)
+                        {
+                            Assert.AreEqual(expOrderDetails.unitPrice, actOrderDetails.Value);
+
+                        }
+                        else if (nameof(expOrderDetails.qty) == actOrderDetails.Key)
+                        {
+                            Assert.AreEqual(expOrderDetails.qty, actOrderDetails.Value);
+
+                        }
+                        else if (nameof(expOrderDetails.total) == actOrderDetails.Key)
+                        {
+                            Assert.AreEqual(expOrderDetails.total, actOrderDetails.Value);
+
+                        }
                     }
                 }
+            
             }
-
             driver.Quit();
         }
 
@@ -125,6 +135,28 @@ namespace Com.TestProject.Subbu.Steps
             driver.Quit();
         }
 
+        [Then(@"I select T-Shirt and I Order the T-Shirts")]
+        public void ThenISelectT_ShirtAndIOrderTheT_Shirts()
+        {
+            tShirtsPage = new TShirtsPage(driver);
+            // Add to shopping Cart and ProceedtoCheckout
+            OrderReferenceNumber = tShirtsPage.OrderTShirtAndGetOrderDetails();
+
+            //
+        }
+
+        [Then(@"Click on login id from menu link and Click on Order Summary details")]
+        public void ThenClickOnLoginIdFromMenuLinkAndClickOnOrderSummaryDetails()
+        {
+            signInPage = new SignInPage(driver);
+            signInPage.ClickOnUserNameButton();
+
+            //Click on Order Summary Details
+            shirts_OrderSummary = new TShirts_OrderSummary(driver);
+            dictOrderSummaryDetails = shirts_OrderSummary.GetOrderSummaryDetails(OrderReferenceNumber);
+
+        }
+
     }
 
     public class OrderDetails
@@ -135,6 +167,12 @@ namespace Com.TestProject.Subbu.Steps
         public string qty { get; set; }
         public string total { get; set; }
         public OrderDetails() { }
+    }
+    public class OrderReferenceDetails
+    {
+        public string orderConfirmMessage { get; set; }
+        public string orderAmount { get; set; }
+        public string orderReferenceNo { get; set; }
     }
 
 
