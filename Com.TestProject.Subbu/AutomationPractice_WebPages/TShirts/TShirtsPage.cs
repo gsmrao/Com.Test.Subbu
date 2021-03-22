@@ -111,7 +111,7 @@ namespace Com.TestProject.Subbu.AutomationPractice_WebPages.TShirts
             //Get Order confirmation details
             myOrderCompleteMsg = _driver.FindElement(By.XPath("//*[@id='center_column']/div/p/strong"));
             dicOrderConformationDetails.Add("orderConfirmMessage", myOrderCompleteMsg.Text);
-            //*[@id='center_column']/div				
+            		
             myOrderCompleteMsg = _driver.FindElement(By.XPath("//*[@id='center_column']/div"));
 
             string[] stringSeparators = new string[] { "\r\n" };

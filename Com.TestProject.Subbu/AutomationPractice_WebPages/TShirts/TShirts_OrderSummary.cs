@@ -44,7 +44,6 @@ namespace Com.TestProject.Subbu.AutomationPractice_WebPages.TShirts
         public IWebElement OrderSumaryTable_OrderReferenceLink { get; set; }
 
         //Oder details table
-        //  
         [FindsBy(How = How.XPath, Using = "//*[@id='order-list']/tbody")]
         public IWebElement OrderDetailsTable { get; set; }
 
